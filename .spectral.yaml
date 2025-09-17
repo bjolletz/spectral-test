@@ -3,7 +3,7 @@ extends:
   - ./rulesets/url_style_guidelines/.spectral.json
   - ./rulesets/versioning/.spectral.json
 #  - ./rulesets/enforce_https/.spectral.json
-#  - ./rulesets/owasp/.spectral.json
+  - ./rulesets/owasp/.spectral.json
 #  - ./rulesets/documentation/.spectral.json
 #  - ./spellcheck/.spectral.json # Doesn't work with Zscaler
 rules:
