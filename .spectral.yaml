@@ -2,9 +2,10 @@ extends:
   - spectral:oas
   - ./rulesets/url_style_guidelines/.spectral.json
   - ./rulesets/versioning/.spectral.json
+  - ./owasp.mjs
 #  - ./rulesets/enforce_https/.spectral.json
 #  - ./rulesets/owasp/.spectral.json
-  - https://unpkg.com/@stoplight/spectral-owasp-ruleset@2.0.1/dist/ruleset.mjs
+#  - https://unpkg.com/@stoplight/spectral-owasp-ruleset@2.0.1/dist/ruleset.mjs
 #  - ./rulesets/documentation/.spectral.json
 #  - ./spellcheck/.spectral.json # Doesn't work with Zscaler
 rules:
