@@ -1,0 +1,34 @@
+{
+  "description": "### Set of rules to enforce spelling on API titles, summaries, and descriptions\r\n\r\nThis style guide is based on the [nspell](https://github.com/wooorm/nspell) external service. Review this library before enabling this style guide. \r\n\r\n#### Use the spell-check rule\r\n\r\n1. Go to your Stoplight workspace.\r\n2. Create a [style guide project](https://meta.stoplight.io/docs/platform/364e30f79daa0-create-a-style-guide) OR edit a project that has an API.\r\n3. Select **Manage Style Guides**.\r\n4. Enable **Spell Check** from the list of public style guides.\r\n5. Review the rule, and then:\r\n\r\n    - Use the style guide as-is to [automatically check spelling for the title, summaries, and descriptions](https://meta.stoplight.io/docs/platform/7975f76a794c4-validation-and-linting) your API files\r\n    - [Disable the rule](https://meta.stoplight.io/docs/platform/3f80fd36750e3-disable-inherited-rules) so you can customize it for your organization\r\n    - [Duplicate the rule](https://meta.stoplight.io/docs/platform/2331c5241ddfc) and customize it to meet your needs\r\n\r\n#### Add words to the ignore list\r\n\r\n1. Disable the rule that you want to add ignore words to.\r\n2. Duplicate the rule, and then set its status to `information`, `hint`, `warning`, or `error`.\r\n3. In the **Then** section of the Rule Editor, select **+Add** to add words that should be ignored.\r\n\r\n> JSON and APIs are added as default ignore words.\r\n",
+  "formats": [
+    "oas2",
+    "oas3",
+    "oas3.0",
+    "oas3.1"
+  ],
+  "aliases": {},
+  "rules": {
+    "spell-check": {
+      "given": [
+        "$..[description,title,summary]"
+      ],
+      "severity": "info",
+      "then": {
+        "function": "spell-check",
+        "functionOptions": {
+          "lang": "en",
+          "ignoreWords": [
+            "APIs",
+            "JSON"
+          ]
+        }
+      },
+      "description": "`description`, `title`, or `summary` property contains a misspelled word. If the spelling is correct, contact your API owner to add words to the `ignore` list.\r\n\r\n**Invalid Example**\r\n\r\nThe Info description contains a misspelling (ToDo).\r\n\r\n```yaml lineNumbers\r\ninfo:\r\n  ...\r\n  ...\r\n  description: The ToDo API provides a simple way for people to manage their tasks and plan their day.\r\n```\r\n\r\n**Valid Example**\r\n\r\nThe Info description does not contain misspellings.\r\n\r\n```yaml lineNumbers\r\ninfo:\r\n  ...\r\n  ...\r\n  description: The To-do API provides a simple way for people to manage their tasks and plan their day.\r\n```",
+      "message": "{{error}}"
+    }
+  },
+  "functions": [
+    "spell-check"
+  ],
+  "functionsDir": "functions"
+}

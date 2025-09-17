@@ -1,0 +1,49 @@
+{
+  "description": "### Set of rules to enforce HTTPS on OpenAPI 2.0, 3.0 and 3.1 APIs\n\nTo use these rules: \n1. Go to your Stoplight workspace.\n2. Create a [style guide project](https://meta.stoplight.io/docs/platform/364e30f79daa0-create-a-style-guide) OR edit a project that has an API.\n3. Select **Manage Style Guides**.\n4. Enable `Enforce HTTPS` from list of public style guides.\n\nYou can then :\n\n- Use the style guide as-is to [automatically lint](https://meta.stoplight.io/docs/platform/7975f76a794c4-validation-and-linting) your API files\n- [Disable individual rules](https://meta.stoplight.io/docs/platform/3f80fd36750e3-disable-inherited-rules)  that do not follow your organization's standards\n- [Reuse and customize rules](https://meta.stoplight.io/docs/platform/2331c5241ddfc) to meet your needs\n",
+  "formats": [
+    "oas2",
+    "oas3",
+    "oas3.0",
+    "oas3.1"
+  ],
+  "aliases": {},
+  "rules": {
+    "oas2-always-use-https": {
+      "given": [
+        "$.schemes[*]"
+      ],
+      "severity": "error",
+      "then": {
+        "function": "enumeration",
+        "functionOptions": {
+          "values": [
+            "https"
+          ]
+        }
+      },
+      "description": "Host schemes must use the HTTPS protocol.\n\n`Applies to: OpenAPI 2.0`\n\n**Invalid Example**\n\n```json\n{  \n  \"schemes\": [\n    \"http\"\n  ],\n}\n```  \n\n**Valid Example**\n\n```json\n{  \n  \"schemes\": [\n    \"https\"\n  ],\n}\n```  ",
+      "message": "API host schemes must use the HTTPS protocol.",
+      "formats": [
+        "oas2"
+      ]
+    },
+    "oas3-always-use-https": {
+      "given": [
+        "$.servers[*].url"
+      ],
+      "severity": "error",
+      "then": {
+        "function": "pattern",
+        "functionOptions": {
+          "match": "(http:\\/\\/localhost)|(https).*"
+        }
+      },
+      "description": "Servers must use the HTTPS protocol, except when localhost is used.\n\n`Applies to: OpenAPI 3.0 and 3.1`\n\n**Invalid Example**\n\n```json lineNumbers\n{  \n  \"servers\": [\n    {\n      \"url\": \"http://acme.org/api/2.5\"\n    }\n  ]\n}\n```\n**Valid Examples**\n\nHTTPS example:\n\n```json lineNumbers\n{  \n  \"servers\": [\n    {\n      \"url\": \"https://acme.org/api/2.5\"\n    }\n  ],\n}\n```\nLocalhost example:\n\n```json lineNumbers\n{\n  \"servers\": [\n    {\n      \"url\": \"http://localhost:3000\"\n    }\n  ],\n}\n",
+      "message": "Servers must use the HTTPS protocol except when using localhost",
+      "formats": [
+        "oas3"
+      ]
+    }
+  },
+  "functionsDir": "functions"
+}

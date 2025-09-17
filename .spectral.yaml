@@ -1,0 +1,28 @@
+extends:
+  - spectral:oas
+  - ./rulesets/url_style_guidelines/.spectral.json
+  - ./rulesets/versioning/.spectral.json
+  - ./rulesets/enforce_https/.spectral.json
+  - ./rulesets/owasp/.spectral.json
+  - ./rulesets/documentation/.spectral.json
+#  - ./spellcheck/.spectral.json # Doesn't work with Zscaler
+rules:
+# *** OAS ***
+  "operation-operationId": off
+
+# *** OWASP ***
+  "owasp:api4:2019-rate-limit": off
+  "owasp:api4:2019-rate-limit-responses-429": off
+  "owasp:api4:2019-string-restricted": off
+  "owasp:api4:2019-integer-format": off
+  "owasp:api4:2019-string-limit": off
+  "owasp:api4:2019-array-limit": off
+  "owasp:api2:2019-protection-global-safe": off
+  "owasp:api3:2019-define-error-validation": off
+
+# *** URL Style Guidelines ***
+  "query-parameters-snake-case": off
+  "resource-names-plural": off # Replace with base-resource-names-plural
+
+# *** Documentation ***
+  "docs-descriptions": off # Allow descriptions to start with markdown (#). Don't require descriptions to be at least 20 chars.
